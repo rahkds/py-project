@@ -1,3 +1,7 @@
+import json
+from bson import ObjectId
+from datetime import datetime
+
 class CommonUtil():
     """
         CommonUtil - singleton class
@@ -21,4 +25,15 @@ class CommonUtil():
     
     def not_empty(self, value):
         return not self.is_empty(value)
+
+
+# Custom JSON encoder to handle ObjectId and datetime
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, ObjectId):
+            return str(obj)
+        elif isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
+
 

@@ -6,6 +6,9 @@ class MongoConnection():
         conn_str = f"mongodb://{hostname}:{port}/{db}"
         self.connection = MongoClient(conn_str)
 
+    def close(self):
+        self.connection.close()
+
 
 def get_mongo_connection():
     host = app_config.get("MONGO_HOST")
