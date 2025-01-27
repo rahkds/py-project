@@ -1,6 +1,7 @@
 from flask import Response
 from app.config import constants
 import json
+from app.utils.common import CustomJSONEncoder
 
 class APIResponse:
     """
@@ -14,7 +15,7 @@ class APIResponse:
             "message" : message,
             "data" : data if data else {}
         }
-        res_obj = Response(json.dumps(response), content_type='application/json')
+        res_obj = Response(json.dumps(response,cls=CustomJSONEncoder), content_type='application/json')
         return res_obj, status_code
     
     @staticmethod
@@ -24,7 +25,7 @@ class APIResponse:
             "message" : message,
             "errors" : str(errors) if errors else {}
         }
-        res_obj = Response(json.dumps(response), content_type='application/json')
+        res_obj = Response(json.dumps(response, cls=CustomJSONEncoder), content_type='application/json')
         return res_obj, status_code
     
     @staticmethod
@@ -34,5 +35,5 @@ class APIResponse:
             "message" : message,
             "errors" : str(errors) if errors else {}
         }
-        res_obj = Response(json.dumps(response), content_type='application/json')
+        res_obj = Response(json.dumps(response, cls=CustomJSONEncoder), content_type='application/json')
         return res_obj, status_code

@@ -11,7 +11,8 @@ class MongoConnection():
         return self.connection[self.dbname]
 
     def close(self):
-        self.connection.close()
+        pass
+        # self.connection.close()
 
 
 def get_db_connection():
@@ -20,3 +21,5 @@ def get_db_connection():
     dbname = app_config.get("MONGO_DBNAME")
     mongo_conn = MongoConnection(host, port, db=dbname)
     return mongo_conn
+
+mongo_con = get_db_connection()
