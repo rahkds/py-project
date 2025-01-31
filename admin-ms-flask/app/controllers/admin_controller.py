@@ -16,6 +16,8 @@ def create_admin():
 
 def get_admin(admin_id):
     admin_data = admin_service.get_admin_by_id(admin_id)
+    if not admin_data:
+        return APIResponse.validation_error(message="Admin doesn't exists")
     return APIResponse.success(admin_data)
 
 def update_admin(admin_id):
