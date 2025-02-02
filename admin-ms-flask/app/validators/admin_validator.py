@@ -31,3 +31,20 @@ class UpdateAdminSchema(Schema):
     #         ObjectId(value)
     #     except Exception:
     #         raise ValidationError(f"Invalid ObjectId: {value}")
+
+
+class AssignRoleSchema(Schema):
+    role_id = fields.Str(required=True, validate=CommonUtil().not_empty)
+    game_name = fields.Str(required=True, validate=validate.OneOf(['playrummy', 'poker']))
+
+    @validates('role_id')
+    def validate_ObjectId(self, value):
+        try:
+            ObjectId(value)
+        except Exception:
+            raise ValidationError(f"Invalid ObjectId: {value}")    
+
+
+class ListAssignRoleSchema(Schema):
+    roles = fields.List(fields.Nested(AssignRoleSchema), required=True)
+    

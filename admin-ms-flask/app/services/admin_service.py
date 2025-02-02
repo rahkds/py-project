@@ -21,3 +21,9 @@ def update_admin(admin_data, admin_id):
 
 def delete_admin(admin_id):
     mongo_con.getDb().admin_users.delete_one({"_id" : ObjectId(admin_id)})
+
+def assign_role(admin_id, role_data):
+    for role in role_data.get("roles", []):
+        role['role_id'] = ObjectId(role['role_id'])
+
+    mongo_con.getDb().admin_users.update_one({"_id" : ObjectId(admin_id)}, {"$set" : role_data})

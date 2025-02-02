@@ -28,3 +28,12 @@ def update_admin(admin_id):
 def delete_admin(admin_id):
     admin_service.delete_admin(admin_id)
     return APIResponse.success()
+
+def assign_role(admin_id):
+    admin_data = admin_service.get_admin_by_id(admin_id)
+    if not admin_data:
+        return APIResponse.validation_error(message="Admin doesn't exists")    
+    role_data = request.get_json()
+    admin_service.assign_role(admin_id, role_data)
+    return APIResponse.success()
+
