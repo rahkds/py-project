@@ -3,9 +3,9 @@ from app.config.config import app_config
 
 class MongoConnection():
     def __init__(self, hostname, port, db, username=None, password=None):
-        conn_str = f"mongodb://{hostname}:{port}/{db}"
+        self.conn_str = f"mongodb://{hostname}:{port}/{db}"
         self.dbname = db
-        self.connection = MongoClient(conn_str)
+        self.connection = MongoClient(self.conn_str)
 
     def getDb(self):
         return self.connection[self.dbname]

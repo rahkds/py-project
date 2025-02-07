@@ -2,8 +2,6 @@ from marshmallow import Schema, fields, validate, validates, ValidationError, pr
 from app.utils.common import CommonUtil
 from bson import ObjectId
 
-
-
 class CreateAdminSchema(Schema):
     email = fields.Email(required=True, validate=CommonUtil().not_empty)
     username = fields.Str(required=True, validate=CommonUtil().not_empty)
