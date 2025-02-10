@@ -1,7 +1,5 @@
 from app.extensions.mongodb import mongo_con
 from bson  import ObjectId
-from app.utils.common import CustomJSONEncoder
-import json
 
 def get_list():
     return list(mongo_con.getDb().admin_users.find())
